@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ListingController;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,19 +17,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 //All listing
-Route::get('/', function () {
-    return view('listings', [
-        'heading'=>'Latest Listing',
-        'listings' =>Listing::all()
-    ]);
-});
+Route::get('/',[ListingController::class, 'index']);
 
 //Single Listing
-Route::get('/listings/{listing}', function (Listing $listing) {
-    return view('listing',[
-        'listing' => $listing
-    ]);
-});
+Route::get('/listings/{listing}', [ListingController::class,'show']);
+
+
+//Naming Conventions 
+//common Resource Routes:
+// index - Show all listings
+// show - Show a single Lisitng
+// create- Show form to create new listing
+// store - Store new listing
+// edit - Show form to edit listing 
+// update - update listing
+// destroy - delete listing
+
 
 // Route::get('/hello', function() {
 //     return response('<h1>Hello World</h1>', 200)
