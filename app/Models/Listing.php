@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Listing extends Model
 {
     use HasFactory;
-    protected $fillable=['title','logo','company', 'website','description','tags','email','location'];
+    protected $fillable=['user_id','title','logo','company', 'website','description','tags','email','location'];
 
 
 
@@ -22,5 +22,11 @@ class Listing extends Model
             ->orWhere('description','like','%'.request('search').'%')
             ->orWhere('tags','like','%'.request('search').'%');
         }
+    }
+
+
+    //relationship to use 
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
